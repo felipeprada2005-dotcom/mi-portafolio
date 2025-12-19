@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portafolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="ambient-lights">
+    <span></span>
+    <span></span>
+</div>
+
+
+    <header>
+        <h1 class="logo">Mi Portafolio</h1>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#sobre-mi">Sobre Mí</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <section id="inicio" class="section fade-section">
+        <div class="content">
+            <h2>Bienvenido</h2>
+            <div class="section-divider"></div>
+
+            <p>Explora mis proyectos, ilustraciones y trabajos creativos.</p>
+            <a href="#proyectos" class="btn">Ver Proyectos</a>
+        </div>
+    </section>
+
+    <section id="sobre-mi" class="section fade-section alt">
+        <div class="content">
+            <h2>Sobre mí</h2>
+            <p>Soy un creador visual que disfruta el color, el contraste y las ideas arriesgadas.</p>
+        </div>
+    </section>
+    <section id="fotografia" class="section alt fade-section">
+    <div class="content wide">
+        <h2>Fotografía</h2>
+        <p>Exploraciones personales a través de la luz, el color y el encuadre.</p>
+
+        <div class="section-divider"></div>
+
+        <div class="photo-grid">
+            <div class="photo-card">
+                <img src="img/7.jpg" alt="Fotografía 1">
+            </div>
+            <div class="photo-card">
+                <img src="img/3.jpg" alt="Fotografía 2">
+            </div>
+            <div class="photo-card">
+                <img src="img/tigre.jpg" alt="Fotografía 3">
+            </div>
+            <div class="photo-card">
+                <img src="img/carro.jpg" alt="Fotografía 4">
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+</div>
+
+
+    <section id="proyectos" class="section fade-section">
+        <div class="content wide">
+            <h2>Proyectos</h2>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>Proyecto 1</h3>
+                    <img class="campaña" src="img/CAMPAÑA 4 Araña 100X200.jpg" alt="">
+                    <p>Descripción breve del proyecto creativo.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Proyecto 2</h3>
+                    <img class="qr" src="img/qr diverlandia.jpg" alt="">
+                    <p>Algo sobre este proyecto y su estilo visual.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Proyecto 3</h3>
+                    <p>Ilustración, arte o diseño llamativo.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contacto" class="section fade-section alt">
+        <div class="content">
+            <h2>Contacto</h2>
+            <p>Escríbeme si quieres trabajar conmigo.</p>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+    <div class="footer-content">
+        <h3>Felipe Prada</h3>
+        <p>Arte · Fotografía · Diseño visual</p>
+
+        <div class="footer-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#fotografia">Fotografía</a>
+            <a href="#sobre">Sobre mí</a>
+        </div>
+
+        <span class="footer-line"></span>
+
+        <small>© 2025 Felipe Prada · Portafolio personal</small>
+    </div>
+</footer>
+
+
+<script>
+const sections = document.querySelectorAll(".fade-section");
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            entry.target.style.transitionDelay = `${index * 0.1}s`;
+            entry.target.classList.add("visible");
+        }
+    });
+}, { threshold: 0.2 });
+
+sections.forEach(sec => observer.observe(sec));
+</script>
+
+
+
+<script>
+    const body = document.body;
+
+    window.addEventListener("scroll", () => {
+        const scroll = window.scrollY;
+        const height = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scroll / height;
+
+        const blue = Math.floor(31 + progress * 40);
+        const purple = Math.floor(106 - progress * 30);
+
+        body.style.background = `
+            radial-gradient(circle at 20% 20%, rgba(${blue},43,255,0.25), transparent 40%),
+            radial-gradient(circle at 80% 70%, rgba(${purple},0,214,0.25), transparent 45%),
+            linear-gradient(135deg, var(--morado-oscuro), #000016)
+        `;
+    });
+</script>
+<script>
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const closeBtn = document.querySelector(".lightbox-close");
+
+document.querySelectorAll(".photo-card img").forEach(img => {
+    img.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add("active");
+    });
+});
+
+closeBtn.addEventListener("click", () => {
+    lightbox.classList.remove("active");
+});
+
+lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+        lightbox.classList.remove("active");
+    }
+});
+</script>
+
+
+</body>
+</html>

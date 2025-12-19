@@ -1,0 +1,589 @@
+/* COLORES BASE */
+:root {
+    --azul: #1f2bff;
+    --morado: #6a00d6;
+    --morado-oscuro: #2b0066;
+    --texto: #e6e6e6;
+    --suave: rgba(255,255,255,0.08);
+    --card-bg: rgba(255,255,255,0.06);
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background:
+        radial-gradient(circle at 20% 20%, rgba(31,43,255,0.25), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(106,0,214,0.25), transparent 45%),
+        linear-gradient(135deg, var(--morado-oscuro), #000016);
+    color: var(--texto);
+    overflow-x: hidden;
+}
+
+#inicio h2 {
+    font-size: 5.2rem;
+    letter-spacing: 1px;
+    background: linear-gradient(
+        120deg,
+        #ffffff,
+        var(--azul),
+        var(--morado)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+h1, h2, h3 {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+#sobre-mi h2{
+    font-size: 5.2rem;
+}
+
+#proyectos h2{
+    font-size: 5.2rem;
+}
+
+p {
+    font-weight: 300;
+    max-width: 65ch;
+    margin: 0 auto;
+}
+
+/* HEADER */
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(12px);
+    background: rgba(0,0,0,0.35);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    z-index: 999;
+}
+header {
+    backdrop-filter: blur(14px);
+    background: linear-gradient(
+        90deg,
+        rgba(31,43,255,0.15),
+        rgba(106,0,214,0.15),
+        rgba(0,0,0,0.35)
+    );
+}
+
+
+header .logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+}
+
+header nav a {
+    color: #ddd;
+    margin: 0 15px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+header nav a {
+    position: relative;
+}
+
+header nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--azul), var(--morado));
+    transition: width 0.3s ease;
+}
+
+header nav a:hover::after {
+    width: 100%;
+}
+
+
+header nav a:hover {
+    color: var(--azul);
+}
+
+.ambient-lights {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -2;
+}
+
+.ambient-lights span {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(160px);
+    opacity: 0.25;
+    animation: moveLight 25s linear infinite;
+}
+
+.ambient-lights span:first-child {
+    background: var(--azul);
+    top: -200px;
+    left: -200px;
+}
+
+.ambient-lights span:last-child {
+    background: var(--morado);
+    bottom: -200px;
+    right: -200px;
+    animation-delay: 12s;
+}
+
+@keyframes moveLight {
+    0%   { transform: translate(0, 0); }
+    50%  { transform: translate(120px, 80px); }
+    100% { transform: translate(0, 0); }
+}
+
+/* SECCIONES */
+#inicio .content {
+    animation: float 6s ease-in-out infinite;
+}
+.section {
+    min-height: 100vh;
+    padding: 150px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: transparent;
+    position: relative;
+}
+
+.campaña {
+    width: 300px;
+}
+
+.qr{
+    width: 300px;
+}
+/* === FOTOGRAFÍA === */
+
+.photo-grid {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.photo-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    background: rgba(20, 10, 40, 0.6);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(6px);
+    transition: 0.4s ease;
+}
+
+.photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.05);
+    transition: transform 0.6s ease;
+}
+
+/* Hover artístico */
+.photo-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.45),
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.photo-card:hover::after {
+    opacity: 1;
+}
+
+.photo-card:hover img {
+    transform: scale(1.12);
+}
+
+.photo-card:hover {
+    box-shadow: 0 25px 60px rgba(31,43,255,0.35);
+}
+
+/* === LIGHTBOX === */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 5, 15, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 9999;
+}
+
+.lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-img {
+    max-width: 85%;
+    max-height: 85%;
+    border-radius: 16px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+    animation: zoomIn 0.4s ease;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 2.5rem;
+    color: white;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.lightbox-close:hover {
+    opacity: 1;
+}
+
+/* Animación */
+@keyframes zoomIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Degradados suaves entre secciones */
+.section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--azul), var(--morado));
+    opacity: 0.12;
+    z-index: -1;
+    filter: blur(90px);
+}
+
+.section-divider {
+    width: 120px;
+    height: 3px;
+    margin: 40px auto 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--azul),
+        var(--morado),
+        transparent
+    );
+    opacity: 0.6;
+}
+
+
+/* Variación alterna */
+.section.alt::before {
+    opacity: 0.16;
+}
+
+
+/* Contenido */
+.content {
+    max-width: 800px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.content.wide {
+    max-width: 1100px;
+}
+
+/* Tarjetas */
+.grid {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    margin-top: 40px;
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.08),
+        transparent
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.01);
+    box-shadow:
+        0 25px 60px rgba(31,43,255,0.35),
+        inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+
+
+/* Animación fade suave */
+.fade-section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s ease;
+}
+
+.fade-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Botón */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, var(--azul), var(--morado));
+    border-radius: 25px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    filter: brightness(1.2);
+}
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    opacity: 0.08;
+    z-index: 9999;
+}
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at 30% 30%,
+        rgba(255,255,255,0.35),
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.btn:hover::after {
+    opacity: 1;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+
+/* ===== FOOTER ===== */
+
+.footer {
+    position: relative;
+    padding: 120px 10% 60px;
+    text-align: center;
+    background: transparent;
+}
+
+.footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0),
+        rgba(0,0,0,0.45)
+    );
+    pointer-events: none;
+}
+
+.footer-content h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.footer-content p {
+    opacity: 0.7;
+    margin-bottom: 30px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+}
+
+.footer-links a {
+    color: var(--texto);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    color: var(--azul);
+}
+
+.footer-line {
+    display: block;
+    width: 140px;
+    height: 2px;
+    margin: 0 auto 25px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--azul),
+        var(--morado),
+        transparent
+    );
+    opacity: 0.6;
+}
+
+.footer small {
+    opacity: 0.5;
+    font-size: 0.85rem;
+}
+
+
+
+/* Animación sutil flotante */
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+
+    header {
+        padding: 15px 20px;
+    }
+
+    header nav {
+        display: none;
+    }
+
+    header .logo {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    #inicio h1 {
+        font-size: clamp(2.6rem, 9vw, 3.4rem);
+    }
+
+    .section {
+        padding: 120px 7% 100px;
+    }
+
+    p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .grid,
+    .photo-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .card,
+    .photo-card {
+        border-radius: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .lightbox-img {
+        max-width: 92%;
+        max-height: 80%;
+    }
+
+    .lightbox-close {
+        top: 20px;
+        right: 20px;
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .footer {
+        padding: 80px 7% 50px;
+    }
+
+    .footer-links {
+        gap: 18px;
+    }
+
+    .footer-content h3 {
+        font-size: 1.4rem;
+    }
+}
