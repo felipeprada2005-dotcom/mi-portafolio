@@ -176,6 +176,9 @@ header nav a:hover {
 .qr{
     width: 300px;
 }
+.era{
+    width: 300px;
+}
 /* === FOTOGRAFÍA === */
 
 .photo-grid {
@@ -587,3 +590,4 @@ body::after {
         font-size: 1.4rem;
     }
 }
+
